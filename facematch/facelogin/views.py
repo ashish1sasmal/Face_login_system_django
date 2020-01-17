@@ -157,7 +157,6 @@ def user_login(request):
                 else:
                     messages.warning(request,'Sorry ! Face does not match')
                     return redirect('login')
-
             else:
                 messages.warning(request,'Can\'t capture Bright image of face !')
                 return redirect('login')
