@@ -20,11 +20,10 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'c@%hxd5_0u#sr&4-wwj(i8b-^7q)rjj*=)5j@k@8$h)tfs))xg'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["facelogindjango.herokuapp.com",'127.0.0.1']
+ALLOWED_HOSTS = ["djangofacelogin.herokuapp.com",'127.0.0.1']
 
 
 # Application definition
