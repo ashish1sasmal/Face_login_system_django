@@ -1,16 +1,15 @@
 from django.shortcuts import render,redirect
-from .forms import UserForm,ProfileForm,SnapForm
+from .forms import UserForm,ProfileForm
 from django.contrib.auth import authenticate
 
 from django.contrib import messages
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
 import os
-from .models import Snaps
 import face_recognition
 from django.views.generic import TemplateView
 from django.http import HttpResponse
-
+from .models import Profile
 import cgi
 from base64 import b64decode
 
@@ -134,15 +133,19 @@ def user_login(request):
             header, encoded = data_uri.split(",", 1)
             data = b64decode(encoded)
             #print(data)
-            with open("media/login/"+str(user.username)+".png", "wb") as f:
+            with open("media/temp/"+str(user.username)+".png", "wb") as f:
                 f.write(data)
-            form=Snaps(user=user,image="media/login/"+str(user.username)+".png")
+            print('image save')
+            form=Profile.objects.filter(user=user)[0]
+            form.temp="temp/"+str(user.username)+".png"
             form.save()
             # form=Snaps(user=user,image="media/login/"+str(user.username)+".png")
             # form.save()
-            got_image = face_recognition.load_image_file("media/login/"+str(user.username)+".png")
+            print('form save')
+            got_image = face_recognition.load_image_file("media/temp/"+str(user.username)+".png")
 
             existing_image = face_recognition.load_image_file(str(loc))
+            print('location')
             existing_image_facialfeatures = face_recognition.face_encodings(existing_image)[0]
             print("y")
             got_image_facialfeatures = face_recognition.face_encodings(got_image)
