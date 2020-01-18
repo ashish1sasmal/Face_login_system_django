@@ -133,9 +133,11 @@ def user_login(request):
             data_uri = data
             header, encoded = data_uri.split(",", 1)
             data = b64decode(encoded)
+            #print(data)
             with open("media/login/"+str(user.username)+".png", "wb") as f:
                 f.write(data)
-
+            form=Snaps(user=user,image="media/login/"+str(user.username)+".png")
+            form.save()
             # form=Snaps(user=user,image="media/login/"+str(user.username)+".png")
             # form.save()
             got_image = face_recognition.load_image_file("media/login/"+str(user.username)+".png")
@@ -145,7 +147,7 @@ def user_login(request):
             print("y")
             got_image_facialfeatures = face_recognition.face_encodings(got_image)
             if got_image_facialfeatures!=[]:
-                print(got_image_facialfeatures)
+                #print(got_image_facialfeatures)
                 got_image_facialfeatures=got_image_facialfeatures[0]
                 results= face_recognition.compare_faces([existing_image_facialfeatures],got_image_facialfeatures)
 
