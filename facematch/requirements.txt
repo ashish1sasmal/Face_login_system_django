@@ -2,7 +2,7 @@ asgiref==3.2.3
 Click==7.0
 cmake==3.13.3
 dj-database-url==0.5.0
-Django==3.0.2
+Django==3.0.7
 django-heroku==0.3.1
 dlib==19.19.0
 face-recognition==1.2.3
